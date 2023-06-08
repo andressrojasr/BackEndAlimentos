@@ -18,6 +18,7 @@ def iniciarSesion(request):
             'nombre': usuario_obj.Nom_Usu,
             'apellido' : usuario_obj.Ape_Usu,
             'fecNac' : usuario_obj.Fec_Nac_usu,
+            'autenticado': True,
         }
         return JsonResponse(datos_usuario)
     
