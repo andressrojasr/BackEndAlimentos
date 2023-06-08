@@ -7,20 +7,23 @@ from .models import *
 def iniciarSesion(request):
     if request.method == 'POST':
         usuario = request.POST.get('usuario')
-        contrasena= request.POST.get('contrasena')
+        con_usu = request.POST.get('contrasena')
+
         try:
-            usuario_obj= USUARIOS.objects.get(Nom_Usu=usuario, Con_Usu=contrasena)
+            usuario_obj = USUARIOS.objects.get(Usuario=usuario)
+            if usuario_obj.Con_Usu == con_usu:
+                # Usuario y Con_Usu son correctos
+                return JsonResponse({'mensaje': 'Validación exitosa'})
+            else:
+                # Contraseña incorrecta
+                return JsonResponse({'mensaje': 'Contraseña incorrecta'})
         except USUARIOS.DoesNotExist:
-            return JsonResponse({'error': 'Credenciales inválidas'}, status=401)
-        
-        datos_usuario={
-            'usuario': usuario_obj.Usuario,
-            'nombre': usuario_obj.Nom_Usu,
-            'apellido' : usuario_obj.Ape_Usu,
-            'fecNac' : usuario_obj.Fec_Nac_usu,
-            'autenticado': True,
-        }
-        return JsonResponse(datos_usuario)
+            # Usuario no encontrado
+            return JsonResponse({'mensaje': 'Usuario no encontrado'})
+
+    else:
+        # Método de solicitud no válido
+        return JsonResponse({'mensaje': 'Método no válido'})
     
 def guardarUsuario(request):
     if request.method == 'POST':
