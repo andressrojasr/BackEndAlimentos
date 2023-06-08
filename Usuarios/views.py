@@ -13,10 +13,10 @@ def iniciarSesion(request):
             usuario_obj = USUARIOS.objects.get(Usuario=usuario)
             if usuario_obj.Con_Usu == con_usu:
                 # Usuario y Con_Usu son correctos
-                return JsonResponse({'mensaje': 'Validación exitosa'})
+                return JsonResponse(True)
             else:
                 # Contraseña incorrecta
-                return JsonResponse({'mensaje': 'Contraseña incorrecta'})
+                return JsonResponse(False)
         except USUARIOS.DoesNotExist:
             # Usuario no encontrado
             return JsonResponse({'mensaje': 'Usuario no encontrado'})
