@@ -9,7 +9,7 @@ def iniciarSesion(request):
         usuario = request.POST.get('usuario')
         contrasena= request.POST.get('contrasena')
         try:
-            usuario_obj= USUARIOS.objects.get(Usuario=usuario, Con_Usu=contrasena)
+            usuario_obj= USUARIOS.objects.get(Nom_Usu=usuario, Con_Usu=contrasena)
         except USUARIOS.DoesNotExist:
             return JsonResponse({'error': 'Credenciales inválidas'}, status=401)
         
