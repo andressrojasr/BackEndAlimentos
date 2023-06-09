@@ -8,18 +8,20 @@ def iniciarSesion(request):
     if request.method == 'POST':
         usuario = request.POST.get('usuario')
         con_usu = request.POST.get('contrasena')
+        return JsonResponse(usuario)    
 
-        try:
-            usuario_obj = USUARIOS.objects.get(Usuario=usuario)
-            if usuario_obj.Con_Usu == con_usu:
+   #    try:
+   #         usuario_obj = USUARIOS.objects.get(Usuario=usuario)
+            
+    #        if usuario_obj.Con_Usu == con_usu:
                 # Usuario y Con_Usu son correctos
-                return JsonResponse(True)
-            else:
+     #           return JsonResponse(True)
+      #      else:
                 # Contraseña incorrecta
-                return JsonResponse(False)
-        except USUARIOS.DoesNotExist:
+      #          return JsonResponse(False)
+       # except USUARIOS.DoesNotExist:
             # Usuario no encontrado
-            return JsonResponse({'mensaje': 'Usuario no encontrado'})
+        #    return JsonResponse({'mensaje': 'Usuario no encontrado'})#
 
     else:
         # Método de solicitud no válido
