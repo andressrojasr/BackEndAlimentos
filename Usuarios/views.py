@@ -2,13 +2,14 @@ from django.contrib.auth import authenticate, login, logout
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .models import USUARIOS
 
 class LoginView(APIView):
     def post(self, request):
         # Recuperamos las credenciales y autenticamos al usuario
-        email = request.data.get('email', None)
+        usuario = request.data.get('usuario', None)
         password = request.data.get('password', None)
-        user = authenticate(email=email, password=password)
+        user = USUARIOS (Usuario=usuario, Con_Usu=password)
 
         # Si es correcto añadimos a la request la información de sesión
         if user:
