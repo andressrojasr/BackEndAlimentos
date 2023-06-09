@@ -28,8 +28,8 @@ def iniciarSesion(request):
         return JsonResponse({'mensaje': 'Método no válido'})
     
 def guardarUsuario(request):
-    if request.method == 'POST':
-        usuario = request.POST.get('usuario')
+    if request.method == 'Post':
+        usuario = request.Post.get('usuario')
         nom_usu = request.POST.get('nom_usu')
         ape_usu = request.POST.get('ape_usu')
         con_usu = request.POST.get('con_usu')
