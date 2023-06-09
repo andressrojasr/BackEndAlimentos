@@ -1,6 +1,6 @@
 from rest_framework import routers
 from .api import *
-from .views import iniciarSesion, guardarUsuario
+from .views import LoginView
 from django.urls import path, include
 
 router = routers.DefaultRouter()
@@ -14,7 +14,6 @@ router.register('DetAlimentos',DetalleAlimentosViewSet, 'DetAlimentos')
 router.register('Administradores', AdministradoresViewSet,'Administradores')
 
 urlpatterns = [
-    path('usuarios/iniciarSesion/', iniciarSesion, name='iniciarSesion'),
-    path('usuarios/guardarUsuario/', guardarUsuario, name='guardarUsuario'),
+    path('auth/loginView', LoginView.as_view(), name='loginView'),
     path('api/', include(router.urls)),
 ]
