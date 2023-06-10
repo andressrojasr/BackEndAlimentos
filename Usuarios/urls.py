@@ -14,6 +14,6 @@ router.register('DetAlimentos',DetalleAlimentosViewSet, 'DetAlimentos')
 router.register('Administradores', AdministradoresViewSet,'Administradores')
 
 urlpatterns = [
-    path('auth/loginView', LoginView.as_view(), name='loginView'),
+    path('auth/loginView/', LoginView.as_view(), name='loginView'),
     path('api/', include(router.urls)),
 ]
