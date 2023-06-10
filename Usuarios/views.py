@@ -3,20 +3,19 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.hashers import check_password
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import USUARIOS
+from .models import TIP_ALIMENTOS
 
 class LoginView(APIView):
     def post(self, request):
         # Obtener los datos enviados desde Ionic
-        usuario = request.data.get('Usuario')
-        contraseña = request.data.get('Con_Usu')
-
+        usuario = request.data.get('Nom_Tip')
+        contrasena = request.data.get('Des_Tip')
         # Validar los datos con el modelo
         try:
-            usuario_obj = USUARIOS.objects.get(Usuario=usuario)
-            if check_password(contraseña, usuario_obj.Con_Usu):
+            usuario_obj = TIP_ALIMENTOS.objects.get(Nom_Tip=usuario)
+            if check_password(contrasena, usuario_obj.Des_Tip):
                 return Response({'mensaje': 'Los datos son válidos'})
             else:
                 return Response({'mensaje': 'Contraseña incorrecta'})
-        except USUARIOS.DoesNotExist:
+        except TIP_ALIMENTOS.DoesNotExist:
             return Response({'mensaje': 'Usuario no encontrado'})
