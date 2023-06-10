@@ -1,11 +1,17 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password
 
 class USUARIOS(models.Model):
     Usuario = models.CharField(max_length=20, primary_key=True)
     Nom_Usu = models.CharField(max_length=20)
     Ape_Usu = models.CharField(max_length=20)
-    Con_Usu = models.CharField(max_length=25)
+    Con_Usu = models.CharField(max_length=128)
     Fec_Nac_usu = models.DateField()
+
+    def save(self, *args, **kwargs):
+        # Aplica la función de hash a la contraseña antes de guardarla
+        self.Con_Usu = make_password(self.Con_Usu)
+        super().save(*args, **kwargs)
 
 class REG_USUARIOS(models.Model):
     Fec_Reg = models.DateField()
