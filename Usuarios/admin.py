@@ -1,5 +1,13 @@
 from django.contrib import admin
+from django.contrib.admin import AdminSite
 from .models import USUARIOS, TIP_ALIMENTOS, REGISTRO_ALIMENTOS, ALIMENTOS, DETALLE_ALIMENTOS, REG_USUARIOS
+from django.utils.translation import ugettext_lazy
+
+
+class MyAdminSite(AdminSite):
+    site_header = ugettext_lazy('My administration')
+AdminSite=MyAdminSite()
+
 
 @admin.register(USUARIOS)
 class UsuarioAdmin(admin.ModelAdmin):
