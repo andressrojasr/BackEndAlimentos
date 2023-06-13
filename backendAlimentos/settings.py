@@ -78,7 +78,7 @@ JAZZMIN_SETTINGS={
         'Usuarios.TIP_ALIMENTOS': 'fas-thin fa-pizza',
         
     },
-    'language_chooser': True,
+    'language_chooser': 'True',
 }
 
 JAZZMIN_UI_TWEAKS = {
