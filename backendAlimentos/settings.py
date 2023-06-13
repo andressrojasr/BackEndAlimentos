@@ -64,8 +64,8 @@ CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
 
 JAZZMIN_SETTINGS={
-    'site-title': 'Alimentos',
-    'site-header': 'Control de Alimentos',
+    'site_title': 'Alimentos',
+    'site_header': 'Control de Alimentos',
     'site_logo': 'Imagenes/Logo.png',
     'welcome_sign': 'Bienvenido. Inicia sesión para continuar',
     'icons':{
