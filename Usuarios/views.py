@@ -1,49 +1,22 @@
-from django.shortcuts import render
-from django.contrib.auth import authenticate
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import *
+from django.utils.decorators import method_decorator
+from django.contrib.auth.hashers import check_password
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import USUARIOS
 
-def iniciarSesion(request):
-    if request.method == 'POST':
-        usuario = request.POST.get('usuario')
-        con_usu = request.POST.get('contrasena')
-        return JsonResponse(usuario)    
+class LoginView(APIView):
+    def post(self, request):
+        # Obtener los datos enviados desde Ionic
+        usuario = request.data.get('Usuario')
+        contraseña = request.data.get('Con_Usu')
 
-   #    try:
-   #         usuario_obj = USUARIOS.objects.get(Usuario=usuario)
-            
-    #        if usuario_obj.Con_Usu == con_usu:
-                # Usuario y Con_Usu son correctos
-     #           return JsonResponse(True)
-      #      else:
-                # Contraseña incorrecta
-      #          return JsonResponse(False)
-       # except USUARIOS.DoesNotExist:
-            # Usuario no encontrado
-        #    return JsonResponse({'mensaje': 'Usuario no encontrado'})#
-
-    else:
-        # Método de solicitud no válido
-        return JsonResponse({'mensaje': 'Método no válido'})
-    
-def guardarUsuario(request):
-    if request.method == 'POST':
-        usuario = request.POST.get('usuario')
-        nom_usu = request.POST.get('nom_usu')
-        ape_usu = request.POST.get('ape_usu')
-        con_usu = request.POST.get('con_usu')
-        fec_nac_usu= request.POST.get('fec_nac_usu')
-
-        usuario_obj = USUARIOS(
-            Usuario = usuario,
-            Nom_Usu = nom_usu,
-            Ape_Usu = ape_usu,
-            Con_Usu = con_usu,
-            Fec_Nac_usu = fec_nac_usu
-        )
-        usuario_obj.save()
-
-        return JsonResponse({'message': 'Datos guardados correctamente'})
-    
-    return JsonResponse({'error': 'Se requiere una solicitud POST'})
+        # Validar los datos con el modelo
+        try:
+            usuario_obj = USUARIOS.objects.get(Usuario=usuario)
+            if (contraseña ==usuario_obj.Con_Usu):
+                return Response({'mensaje': 'Los datos son válidos'})
+            else:
+                return Response({'mensaje': 'Contraseña incorrecta'})
+        except USUARIOS.DoesNotExist:
+            return Response({'mensaje': 'Usuario no encontrado'})

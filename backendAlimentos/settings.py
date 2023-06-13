@@ -35,6 +35,8 @@ if RENDER_EXTERNAL_HOSTNAME:
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,22 +45,49 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Usuarios',
     'rest_framework',
-    'corsheaders',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
+
+JAZZMIN_SETTINGS={
+    'site_title': 'Alimentos',
+    "site_header": "Library",
+    'site_logo': 'Imagenes/Logo.png',
+    'welcome_sign': 'Bienvenido. Inicia sesión para continuar',
+    'copyright': 'Creado por Andrés y Christopher',
+    'icons':{
+        'auth.user': 'fas fa-user',
+        'auth.Group': 'fas fa-users',
+        'Usuarios.ALIMENTOS':'fas fa-coffee',
+        'Usuarios.USUARIOS':'fas fa-user',
+        'Usuarios.DETALLE_ALIMENTOS': 'fa fa-book',
+        'Usuarios.REG_USUARIOS':'fas fa-user-plus',
+        'Usuarios.REGISTRO_ALIMENTOS': 'fa fa-book',
+        'Usuarios.TIP_ALIMENTOS': 'fas fa-coffee',
+        
+    }
+}
+
+JAZZMIN_UI_TWEAKS = {
+    'theme': 'united',
+    'dark_mode_theme': 'slate',
+}
+
+STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
 
 ROOT_URLCONF = 'backendAlimentos.urls'
 
@@ -137,8 +166,5 @@ if not DEBUG:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8100',  
-]
 
 
