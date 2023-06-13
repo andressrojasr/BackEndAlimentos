@@ -72,10 +72,11 @@ JAZZMIN_SETTINGS={
         'auth.user': 'fas fa-user',
         'auth.Group': 'fas fa-users',
         'Usuarios.ALIMENTOS':'fas fa-coffee',
-        'Usuarios.DETALLE_ALIMENTOS': 'fas fa-cutlery',
+        'Usuarios.USUARIOS':'fas fa-user',
+        'Usuarios.DETALLE_ALIMENTOS': 'fa fa-book',
         'Usuarios.REG_USUARIOS':'fas fa-user-plus',
         'Usuarios.REGISTRO_ALIMENTOS': 'fa fa-book',
-        'Usuarios.TIP_ALIMENTOS': 'fas fa-pizza',
+        'Usuarios.TIP_ALIMENTOS': 'fas fa-coffee',
         
     }
 }
