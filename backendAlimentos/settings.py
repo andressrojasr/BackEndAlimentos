@@ -66,9 +66,7 @@ CSRF_COOKIE_HTTPONLY = False
 JAZZMIN_SETTINGS={
     "site-title": "Administración",
     "site-header": "Alimentos",
-    "site_logo": "./Imagenes/Logo.png",
     "welcome_sign": "Bienvenido, inicia sesión para continuar",
-
 }
 
 ROOT_URLCONF = 'backendAlimentos.urls'
