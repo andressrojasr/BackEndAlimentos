@@ -68,7 +68,7 @@ JAZZMIN_SETTINGS={
     "site-header": "Alimentos",
     "site_logo": "../Imagenes/Logo.png",
     "welcome_sign": "Bienvenido, inicia sesión para continuar",
-    "language_chooser": True,
+
 }
 
 ROOT_URLCONF = 'backendAlimentos.urls'
