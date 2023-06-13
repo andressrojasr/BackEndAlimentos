@@ -77,8 +77,7 @@ JAZZMIN_SETTINGS={
         'Usuarios.REGISTRO_ALIMENTOS': 'fas-thin fa-rectangle-list',
         'Usuarios.TIP_ALIMENTOS': 'fas-thin fa-pizza',
         
-    },
-    'language_chooser': 'True',
+    }
 }
 
 JAZZMIN_UI_TWEAKS = {
