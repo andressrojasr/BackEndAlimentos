@@ -17,16 +17,16 @@ class RegUsuariosAdmin(admin.ModelAdmin):
 
 @admin.register(REGISTRO_ALIMENTOS)
 class RegistroAlimentosAdmin(admin.ModelAdmin):
-    list_display=('Usuario','Fec_Reg')
+    list_display=('Usuario','Fec_reg')
     ordering=('Usuario',)
-    search_fields=('Usuario','Fec_Reg')
+    search_fields=('Usuario','Fec_reg')
 
 
 @admin.register(TIP_ALIMENTOS)
 class TipAlimentosAdmin(admin.ModelAdmin):
-    list_display=('Nom_Tip','Des_Tip')
-    ordering=('Nom_Tip',)
-    search_fields=('Nom_Tip','Des_Tip')
+    list_display=('Nom_tip','Des_Tip')
+    ordering=('Nom_tip',)
+    search_fields=('Nom_tip','Des_Tip')
 
 @admin.register(ALIMENTOS)
 class AlimentosAadmin(admin.ModelAdmin):
@@ -36,7 +36,7 @@ class AlimentosAadmin(admin.ModelAdmin):
 
 @admin.register(DETALLE_ALIMENTOS)
 class DetalleAlimentosAdmin(admin.ModelAdmin):
-    list_display=('Cod_Reg','Id_Ali','Cant_Calo')
+    list_display=('Cod_Reg','Id_Ali','Cant_calo')
     ordering=('Cod_Reg',)
     search_fields=('Cod_Reg','Id_Ali')
 
