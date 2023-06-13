@@ -65,7 +65,7 @@ CSRF_COOKIE_HTTPONLY = False
 
 JAZZMIN_SETTINGS={
     'site_title': 'Alimentos',
-    'site_header': 'Alimentos',
+    "site_header": "Library",
     'site_logo': 'Imagenes/Logo.png',
     'welcome_sign': 'Bienvenido. Inicia sesión para continuar',
     'copyright': 'Creado por Andrés y Christopher',
