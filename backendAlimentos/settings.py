@@ -71,11 +71,12 @@ JAZZMIN_SETTINGS={
     'icons':{
         'auth.user': 'fas fa-user',
         'auth.Group': 'fas fa-users',
-        'Usuarios.ALIMENTOS':'fas fa-pan-food',
-        'Usuarios.DETALLE_ALIMENTOS': 'fas fa-memo-circle-info',
-        'Usuarios.REG_USUARIOS':'fas fa-user-plus',
-        'Usuarios.REGISTRO_ALIMENTOS': 'fas fa-rectangle-list',
-        'Usuarios.TIP_ALIMENTOS': 'fas fa-pizza',
+        'Usuarios.ALIMENTOS':'fas-thin fa-pan-food',
+        'Usuarios.DETALLE_ALIMENTOS': 'fas-thin fa-memo-circle-info',
+        'Usuarios.REG_USUARIOS':'fas-thin fa-user-plus',
+        'Usuarios.REGISTRO_ALIMENTOS': 'fas-thin fa-rectangle-list',
+        'Usuarios.TIP_ALIMENTOS': 'fas-thin fa-pizza',
+        'language_chooser': True,
     }
 }
 
