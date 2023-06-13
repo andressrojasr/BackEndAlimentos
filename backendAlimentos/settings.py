@@ -64,10 +64,27 @@ CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
 
 JAZZMIN_SETTINGS={
-    "site-title": "Administración",
-    "site-header": "Alimentos",
-    "welcome_sign": "Bienvenido, inicia sesión para continuar",
+    'site-title': 'Alimentos',
+    'site-header': 'Control de Alimentos',
+    'site_logo': 'Imagenes/Logo.png',
+    'welcome_sign': 'Bienvenido. Inicia sesión para continuar',
+    'icons':{
+        'auth.user': 'fas fa-user',
+        'auth.Group': 'fas fa-users',
+        'Usuarios.ALIMENTOS':'fas fa-pan-food',
+        'Usuarios.DETALLE_ALIMENTOS': 'fas fa-memo-circle-info',
+        'Usuarios.REG_USUARIOS':'fas fa-user-plus',
+        'Usuarios.REGISTRO_ALIMENTOS': 'fas fa-rectangle-list',
+        'Usuarios.TIP_ALIMENTOS': 'fas fa-pizza',
+    }
 }
+
+JAZZMIN_UI_TWEAKS = {
+    'theme': 'united',
+    'dark_mode_theme': 'slate',
+}
+
+STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
 
 ROOT_URLCONF = 'backendAlimentos.urls'
 
