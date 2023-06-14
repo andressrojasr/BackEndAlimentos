@@ -35,8 +35,8 @@ class LoginView(TokenObtainPairView):
             if user.Con_Usu == password:
                 refresh = RefreshToken.for_user(user)
                 return Response({
-                    'access': str(RefreshToken.access_token),
-                    'refresh': str(refresh),
+                    #'access': str(RefreshToken.access_token),
+                    #'refresh': str(refresh),
                     'mensaje': 'Los datos son válidos',
                 })
             else:
