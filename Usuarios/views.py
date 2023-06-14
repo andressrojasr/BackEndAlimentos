@@ -25,8 +25,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
        # except USUARIOS.DoesNotExist:
         #    return Response({'mensaje': 'Usuario no encontrado'})
 
-class LoginView(APIView):
-    def post(self, request):
+class LoginView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
         username = request.data.get('Usuario')
         password = request.data.get('Con_Usu')
 
