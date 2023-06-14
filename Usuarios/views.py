@@ -32,7 +32,7 @@ class LoginView(TokenObtainPairView):
 
         try:
             user = USUARIOS.objects.get(Usuario=username)
-            if user.Con_Usu == password:
+            if (user.Con_Usu == password):
                 refresh = RefreshToken.for_user(user)
                 return Response({
                     'refresh': str(refresh),
