@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import USUARIOS
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.tokens import Token
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 
@@ -33,7 +33,7 @@ class LoginView(TokenObtainPairView):
         try:
             user = USUARIOS.objects.get(Usuario=username)
             if user.Con_Usu == password:
-                refresh = Token.for_user(user)
+                refresh = RefreshToken.for_user(user)
                 return Response({
                     'access': str(refresh.access_token),
                     'mensaje': 'Los datos son válidos',
