@@ -8,6 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
+
 #class LoginView(APIView):
  #   def post(self, request):
         # Obtener los datos enviados desde Ionic
@@ -34,11 +35,11 @@ class LoginView(TokenObtainPairView):
             if user.Con_Usu == password:
                 refresh = RefreshToken.for_user(user)
                 return Response({
-                    'access': str(refresh.access_token),
+                    'access': str(RefreshToken.access_token),
                     'refresh': str(refresh),
                     'mensaje': 'Los datos son válidos',
                 })
             else:
-                return Response({'mensaje': 'Contraseña incorrecta'}, status=401)
+                return Response({'mensaje': 'Contraseña incorrecta'})
         except USUARIOS.DoesNotExist:
-            return Response({'mensaje': 'Usuario no encontrado'}, status=404)
+            return Response({'mensaje': 'Usuario no encontrado'})
