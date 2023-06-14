@@ -4,8 +4,8 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import USUARIOS
-from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 
@@ -35,8 +35,8 @@ class LoginView(TokenObtainPairView):
             if user.Con_Usu == password:
                 refresh = RefreshToken.for_user(user)
                 return Response({
-                    #'access': str(RefreshToken.access_token),
-                    #'refresh': str(refresh),
+                    'access': str(refresh.access_token),
+                    'refresh': str(refresh),
                     'mensaje': 'Los datos son válidos',
                 })
             else:
