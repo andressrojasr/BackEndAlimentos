@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'Usuarios',
     'rest_framework',
     'rest_framework_simplejwt',
-    'Rest_framework_simplejwt.token_blacklist',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 REST_FRAMEWORK = {
