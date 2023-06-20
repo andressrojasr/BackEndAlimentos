@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import USUARIOS, REG_USUARIOS
-from datetime import datetime
+from datetime import date
 
 
 
@@ -41,6 +41,10 @@ class InsertarRegistro(APIView):
             peso = request.data.get('Peso')
             usuario = request.data.get('Usuario')
             imc = peso/(estatura**2)
+
+            existe=REG_USUARIOS.objects.filter(Usuario= usuario, Fec_Reg=date.today()).exists()
+            if existe:
+                return Response({'mensaje': 'Ya existe un registro en la fecha indicada'})
             
             registro = REG_USUARIOS(
                 Est_Usu= estatura,
