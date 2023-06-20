@@ -37,8 +37,8 @@ class ExisteRegistro(APIView):
 class InsertarRegistro(APIView):
     def post(self, request):
         try:
-            estatura = request.data.get('Estatura')
-            peso = request.data.get('Peso')
+            estatura = float(request.data.get('Estatura'))
+            peso = float(request.data.get('Peso'))
             usuario = request.data.get('Usuario')
             imc = peso/(estatura*estatura)
 
