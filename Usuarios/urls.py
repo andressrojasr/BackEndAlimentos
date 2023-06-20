@@ -15,6 +15,6 @@ router.register('Administradores', AdministradoresViewSet,'Administradores')
 
 urlpatterns = [
     path('auth/loginView/', LoginView.as_view(), name='loginView'),
-    path('auth/existeRegistro/', ExisteRegistro.as_view, name='existeRegistro'),
+    path('auth/existeRegistro/', ExisteRegistro.as_view(), name='existeRegistro'),
     path('api/', include(router.urls)),
 ]
