@@ -64,7 +64,7 @@ class InsertarRegistro(APIView):
                 'usuario': registro.Usuario
             })
         except Exception as e:
-            return Response({'mensaje': 'Ha ocurrido un error al registrar'})
+            return Response({'mensaje': str(e)})
 
 
 
