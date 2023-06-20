@@ -50,7 +50,7 @@ class InsertarRegistro(APIView):
                 Est_Usu= estatura,
                 Pes_Usu= peso,
                 Ind_Mas_Cor=imc,
-                Usuario =usuario
+                Usuario = USUARIOS.objects.get(Usuario=usuario)
 
             )
 
