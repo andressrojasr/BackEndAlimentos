@@ -13,7 +13,7 @@ class USUARIOS(models.Model):
         return txt.format(self.Usuario, self.Nom_Usu, self.Ape_Usu)
     
 class REG_USUARIOS(models.Model):
-    Fec_Reg = models.DateField()
+    Fec_Reg = models.DateField(auto_now_add=True, auto_now=False)
     Est_Usu = models.FloatField()
     Pes_Usu = models.FloatField()
     Ind_Mas_Cor= models.FloatField(null=True)
