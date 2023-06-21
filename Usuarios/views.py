@@ -62,7 +62,7 @@ class InsertarRegistro(APIView):
                 'peso': registro.Pes_Usu,
                 'imc': registro.Ind_Mas_Cor,
                 'usuario': registro.Usuario.Usuario,
-                'mensake': 'true'
+                'mensaje': 'true'
             })
         except Exception as e:
             return Response({'mensaje': str(e)})
