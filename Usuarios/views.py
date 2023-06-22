@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import USUARIOS, REG_USUARIOS
 from datetime import date
+from serializers import RegUsuariosSerializer
 
 
 
@@ -64,6 +65,19 @@ class InsertarRegistro(APIView):
                 'usuario': registro.Usuario.Usuario,
                 'mensaje': 'true'
             })
+        except Exception as e:
+            return Response({'mensaje': str(e)})
+        
+class listarRegistros(APIView):
+    def post(self, request):
+        try:
+            usuario = request.data.get('Usuario')
+
+            reg_usuarios = REG_USUARIOS.objects.filter(Usuario=usuario).order_by('Fec_Reg')
+
+            serializer = RegUsuariosSerializer(reg_usuarios, many=True)
+
+            return Response(serializer.data)
         except Exception as e:
             return Response({'mensaje': str(e)})
 
