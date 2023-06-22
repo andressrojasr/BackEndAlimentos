@@ -41,7 +41,7 @@ class InsertarRegistro(APIView):
             estatura = float(request.data.get('Estatura'))
             peso = float(request.data.get('Peso'))
             usuario = request.data.get('Usuario')
-            imc = peso/((estatura/100)*(estatura/100))
+            imc = round(peso/((estatura/100)*(estatura/100)),2)
 
             existe=REG_USUARIOS.objects.filter(Usuario= usuario, Fec_Reg=date.today()).exists()
             if existe:
