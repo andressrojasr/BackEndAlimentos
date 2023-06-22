@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import USUARIOS, REG_USUARIOS
 from datetime import date
-from serializers import RegUsuariosSerializer
+from .serializers import RegUsuariosSerializer
 
 
 
