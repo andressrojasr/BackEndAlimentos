@@ -73,7 +73,7 @@ class listarRegistros(APIView):
         try:
             usuario = request.data.get('Usuario')
 
-            reg_usuarios = REG_USUARIOS.objects.filter(Usuario=usuario).order_by('Fec_Reg')
+            reg_usuarios = REG_USUARIOS.objects.filter(Usuario=usuario).order_by('-Fec_Reg')
 
             serializer = RegUsuariosSerializer(reg_usuarios, many=True)
 
