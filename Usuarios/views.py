@@ -30,8 +30,11 @@ class ExisteRegistro(APIView):
     def post(self, request):
         usuario = request.data.get('Usuario')
         try:
-            registro = REG_USUARIOS.objects.get(Usuario=usuario)
-            return Response({'mensaje': 'Si'})
+            registro = REG_USUARIOS.objects.filter(Usuario=usuario)
+            if registro.exists():
+                return Response({'mensaje': 'Si'})
+            else:
+                return Response({'mensaje': 'No'})
         except REG_USUARIOS.DoesNotExist:
             return Response({'mensaje': 'No'})
         
