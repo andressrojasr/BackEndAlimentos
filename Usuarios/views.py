@@ -104,7 +104,7 @@ class editarRegistro(APIView):
         
     
 class eliminarRegistro(APIView):
-    def delete(self, request):
+    def post(self, request):
         try:
             fecha = request.data.get('Fec_Reg')
             usuario = request.data.get('Usuario')
