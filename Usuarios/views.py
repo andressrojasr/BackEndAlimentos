@@ -85,7 +85,7 @@ class listarRegistros(APIView):
             return Response({'mensaje': str(e)})
 
 class editarRegistro(APIView):
-    def post(self, request):
+    def put(self, request):
         try: 
             fecha= request.data.get('Fec_Reg')
             usuario= request.data.get('Usuario')
