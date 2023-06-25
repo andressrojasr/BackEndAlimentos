@@ -86,24 +86,22 @@ class listarRegistros(APIView):
 
 class editarRegistro(APIView):
     def post(self, request):
-        fecha= request.data.get('Fec_Reg')
-        usuario= request.data.get('Usuario')
-        estatura = float(request.data.get('Est_Usu'))
-        peso = float(request.data.get('Pes_Usu'))
-        imc = round(peso/((estatura/100)*(estatura/100)),2)
-
         try: 
-            registro = REG_USUARIOS.objects.get(Fec_Reg= fecha, Usuario= usuario)
+            fecha= request.data.get('Fec_Reg')
+            usuario= request.data.get('Usuario')
+            estatura = float(request.data.get('Est_Usu'))
+            peso = float(request.data.get('Pes_Usu'))
+            imc = round(peso/((estatura/100)*(estatura/100)),2)
+            registro = REG_USUARIOS.objects.get(Fec_Reg=fecha, Usuario=usuario)
+            registro.Est_Usu = estatura
+            registro.Pes_Usu=peso
+            registro.Ind_Mas_Cor= imc
+            registro.save()
+            return Response({'mensaje': 'true'})
         except REG_USUARIOS.DoesNotExist:
             return Response({'mensaje': 'Error al actualizar'})
         
-        registro.Est_Usu = estatura
-        registro.Pes_Usu=peso
-        registro.Ind_Mas_Cor= imc
-
-        registro.save()
-
-        return Response({'mensaje': 'true'})
+        
     
 class eliminarRegistro(APIView):
     def delete(self, request):
