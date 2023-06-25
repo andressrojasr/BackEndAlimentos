@@ -84,6 +84,39 @@ class listarRegistros(APIView):
         except Exception as e:
             return Response({'mensaje': str(e)})
 
+class editarRegistro(APIView):
+    def put(self, request):
+        fecha= request.data.get('Fec_Reg')
+        usuario= request.data.get('Usuario')
+        estatura = float(request.data.get('Est_Usu'))
+        peso = float(request.data.get('Pes_Usu'))
+        imc = round(peso/((estatura/100)*(estatura/100)),2)
 
+        try: 
+            registro = REG_USUARIOS.objects.get(Fec_Reg= fecha, Usuario= usuario)
+        except REG_USUARIOS.DoesNotExist:
+            return Response({'mensaje': 'Error al actualizar'})
+        
+        registro.Est_Usu = estatura
+        registro.Pes_Usu=peso
+        registro.Ind_Mas_Cor= imc
+
+        registro.save()
+
+        return Response({'mensaje': 'true'})
+    
+class eliminarRegistro(APIView):
+    def delete(self, request):
+        fecha = request.data.get('Fec_Reg')
+        usuario = request.data.get('Usuario')
+
+        try:
+            registro = REG_USUARIOS.objects.get(Fec_Reg= fecha, Usuario= usuario)
+        except REG_USUARIOS.DoesNotExist:
+            return Response({'mensaje': 'Registro no encontrado'})
+        
+        registro.delete()
+
+        return Response({'mensaje': 'true'})
 
         
