@@ -93,7 +93,7 @@ class editarRegistro(APIView):
         imc = round(peso/((estatura/100)*(estatura/100)),2)
 
         try: 
-            registro = REG_USUARIOS.objects.filter(Fec_Reg= fecha, Usuario= usuario)
+            registro = REG_USUARIOS.objects.get(Fec_Reg= fecha, Usuario= usuario)
         except REG_USUARIOS.DoesNotExist:
             return Response({'mensaje': 'Error al actualizar'})
         
