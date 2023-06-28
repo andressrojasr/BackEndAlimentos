@@ -115,6 +115,20 @@ class eliminarRegistro(APIView):
         except REG_USUARIOS.DoesNotExist:
             return Response({'mensaje': 'Registro no encontrado'})
         
+class filtrarRegistro(APIView):
+    def post(self, request):
+        try:
+            fechaInicio = request.data.get('Fec_Ini')
+            fechaFin = request.data.get('Fec_Fin')
+            usuario = request.data.get('Usuario')
+            
+            registros = REG_USUARIOS.objects.filter(Fec_Reg__gte=fechaInicio, Fec_Reg__lte=fechaFin, Usuario=usuario)
+            serializer = RegUsuariosSerializer(registros, many=True)
+            return Response(serializer.data)
+        except REG_USUARIOS.DoesNotExist:
+            return Response({'mensaje': 'Registro no encontrado'})
+            
+        
         
 
         
