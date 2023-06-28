@@ -14,7 +14,7 @@ class USUARIOS(models.Model):
     
     class Meta:
         verbose_name="Usuario"
-        ver_name_plural="Usuarios"
+        verbose_name_plural="Usuarios"
     
 class REG_USUARIOS(models.Model):
     Fec_Reg = models.DateField(auto_now_add=True, auto_now=False)
