@@ -12,6 +12,10 @@ class USUARIOS(models.Model):
         txt ="{0} (Nombre: {1} Apellido: {2})"
         return txt.format(self.Usuario, self.Nom_Usu, self.Ape_Usu)
     
+    class Meta:
+        verbose_name="Usuario"
+        ver_name_plural="Usuarios"
+    
 class REG_USUARIOS(models.Model):
     Fec_Reg = models.DateField(auto_now_add=True, auto_now=False)
     Est_Usu = models.FloatField()
