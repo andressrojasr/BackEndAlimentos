@@ -122,7 +122,7 @@ class filtrarRegistro(APIView):
             fechaFin = request.data.get('Fec_Fin')
             usuario = request.data.get('Usuario')
             
-            registros = REG_USUARIOS.objects.filter(Fec_Reg__gte=fechaInicio, Fec_Reg__lte=fechaFin, Usuario=usuario)
+            registros = REG_USUARIOS.objects.filter(Fec_Reg__gte=fechaInicio, Fec_Reg__lte=fechaFin, Usuario=usuario).order_by('-Fec_Reg')
             serializer = RegUsuariosSerializer(registros, many=True)
             return Response(serializer.data)
         except REG_USUARIOS.DoesNotExist:
