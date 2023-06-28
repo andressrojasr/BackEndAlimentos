@@ -31,8 +31,3 @@ class DetalleAlimentosViewSet(viewsets.ModelViewSet):
     queryset = DETALLE_ALIMENTOS.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = DetalleAlimentosSerializer
-
-class AdministradoresViewSet(viewsets.ModelViewSet):
-    queryset = ADMINISTRADORES.objects.all()
-    permission_classes = [permissions.AllowAny]
-    serializer_class = AdministradoresSerializer
