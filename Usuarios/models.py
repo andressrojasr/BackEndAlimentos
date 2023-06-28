@@ -26,6 +26,10 @@ class REG_USUARIOS(models.Model):
     def __str__(self):
         txt ="{0} (Fecha: {1})"
         return txt.format(self.Usuario, self.Fec_Reg)
+    
+    class Meta:
+        verbose_name="Registros de IMC de Usuario"
+        verbose_name_plural="Registros de IMC Usuarios"
 
 class REGISTRO_ALIMENTOS(models.Model):
     Fec_reg = models.DateField()
@@ -34,6 +38,10 @@ class REGISTRO_ALIMENTOS(models.Model):
     def __str__(self):
         txt ="{0} (Fecha: {1})"
         return txt.format(self.Usuario, self.Fec_reg)
+    
+    class Meta:
+        verbose_name="Registro de Alimentos Consumidos"
+        verbose_name_plural="Registros de Alimentos Consumidos"
 
 class TIP_ALIMENTOS(models.Model):
     Nom_tip = models.CharField(max_length=20)
@@ -42,6 +50,10 @@ class TIP_ALIMENTOS(models.Model):
     def __str__(self):
         txt ="{0}"
         return txt.format(self.Nom_tip)
+    
+    class Meta:
+        verbose_name="Tipo de Alimento"
+        verbose_name_plural="Tipos de Alimentos"
 
 class ALIMENTOS(models.Model):
     Nom_Ali = models.CharField(max_length=20)
@@ -52,6 +64,10 @@ class ALIMENTOS(models.Model):
     def __str__(self):
         txt ="{0} (Calorias: {1})"
         return txt.format(self.Nom_Ali, self.Cal_Ali)
+    
+    class Meta:
+        verbose_name="Alimento"
+        verbose_name_plural="Alimentos"
 
 class DETALLE_ALIMENTOS(models.Model):
     Cod_Reg = models.ForeignKey(REGISTRO_ALIMENTOS, on_delete=models.CASCADE)
@@ -61,12 +77,8 @@ class DETALLE_ALIMENTOS(models.Model):
     def __str__(self):
         txt ="{0} (Id Alimento: {1} Cantidad calorias: {2})"
         return txt.format(self.Cod_Reg, self.Id_Ali, self.Cant_calo)
-
-class ADMINISTRADORES(models.Model):
-    Usu_Adm = models.CharField(max_length=20, primary_key=True)
-    Con_Adm = models.CharField(max_length=25)
-    Cor_Adm = models.EmailField()
     
-    def __str__(self):
-        txt ="{0} (Usuario: {1} Correo: {2})"
-        return txt.format(self.Usu_Adm, self.Cor_Adm)
+    class Meta:
+        verbose_name="Detalle de Alimentos Consumidos"
+        verbose_name_plural="Detalles de Alimentos Consumidos"
+    

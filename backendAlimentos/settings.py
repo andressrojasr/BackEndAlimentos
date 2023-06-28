@@ -43,8 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'rest_framework',
-    'rest_framework_simplejwt',
-    'rest_framework_simplejwt.token_blacklist',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Usuarios',
@@ -55,12 +53,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
-SIMPLE_JWT = {
- 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
- 'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
- 'ROTATE_REFRESH_TOKENS': True,
- 'BLACKLIST_AFTER_ROTATION': True,
-}
+
 
 CORS_ORIGIN_ALLOW_ALL = True
 

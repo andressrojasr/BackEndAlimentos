@@ -30,8 +30,3 @@ class DetalleAlimentosSerializer(serializers.ModelSerializer):
     class Meta:
         model = DETALLE_ALIMENTOS
         fields= ('id','Cod_Reg','Id_Ali','Cant_calo')
-
-class AdministradoresSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ADMINISTRADORES
-        fields = ('Usu_Adm','Con_Adm','Cor_Adm')
