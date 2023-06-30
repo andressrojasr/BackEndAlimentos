@@ -29,4 +29,4 @@ class AlimentosSerializer(serializers.ModelSerializer):
 class DetalleAlimentosSerializer(serializers.ModelSerializer):
     class Meta:
         model = DETALLE_ALIMENTOS
-        fields= ('id','Cod_Reg','Id_Ali','Cant_calo')
+        fields= ('id','Cod_Reg','Id_Ali','Cantidad','Cant_calo')
