@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import USUARIOS, REG_USUARIOS
+from .models import USUARIOS, REG_USUARIOS, REGISTRO_ALIMENTOS, DETALLE_ALIMENTOS, ALIMENTOS
 from datetime import date
 from .serializers import RegUsuariosSerializer
 
@@ -125,7 +125,34 @@ class filtrarRegistro(APIView):
         except REG_USUARIOS.DoesNotExist:
             return Response({'mensaje': 'Registro no encontrado'})
             
-        
-        
+class insertarRegistroAlimentos(APIView):
+    def post(self, request):
+        try:
+            fecha = request.data.get('Fec_Reg')
+            usuario = request.data.get('Usuario')
+            alimentos = request.data.get('alimentos')
+            registro = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario, Fec_reg=fecha)
+            if registro.exists():
+                return Response({'mensaje': 'false'})
+            else:
+                registro= REGISTRO_ALIMENTOS.objects.create(Fec_reg=fecha, Usuario=usuario)
+
+                for alimento in alimentos:
+                    idAli= alimento.get('id_Ali')
+                    cantidad = alimento.get('Cantidad')
+                    
+                    alimento_obj= ALIMENTOS.objects.get(id=idAli)
+                    cantCalo=(alimento_obj.Cal_Ali*cantidad)
+
+                    detalle = DETALLE_ALIMENTOS.objects.create(
+                        Cod_Reg= registro,
+                        Id_Ali = alimento_obj,
+                        Cantidad = cantidad,
+                        Cant_calo = cantCalo
+                    )
+                return Response({'mensaje': 'true'})
+        except REGISTRO_ALIMENTOS.DoesNotExist:
+            return Response({'mensaje': 'false'})
+
 
         

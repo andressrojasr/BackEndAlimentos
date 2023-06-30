@@ -72,6 +72,7 @@ class ALIMENTOS(models.Model):
 class DETALLE_ALIMENTOS(models.Model):
     Cod_Reg = models.ForeignKey(REGISTRO_ALIMENTOS, on_delete=models.CASCADE)
     Id_Ali = models.ForeignKey(ALIMENTOS, on_delete=models.CASCADE)
+    Cantidad= models.FloatField(null=True)
     Cant_calo = models.FloatField(null=True)
 
     def __str__(self):
