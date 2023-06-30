@@ -1,6 +1,6 @@
 from rest_framework import routers
 from .api import *
-from .views import LoginView, ExisteRegistro, InsertarRegistro, listarRegistros, editarRegistro, eliminarRegistro, filtrarRegistro
+from .views import *
 from django.urls import path, include
 
 router = routers.DefaultRouter()
@@ -20,5 +20,6 @@ urlpatterns = [
     path('auth/editarRegistro/', editarRegistro.as_view(), name='editarRegistro'),
     path('auth/eliminarRegistro/', eliminarRegistro.as_view(), name='eliminarRegistro'),
     path('auth/filtrarRegistro/', filtrarRegistro.as_view(), name='filtrarRegistro'),
+    path('auth/insertarRegistroAlimentos/', insertarRegistroAlimentos.as_view(), name='insertarRegistroAlimentos'),
     path('api/', include(router.urls)),
 ]
