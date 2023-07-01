@@ -133,7 +133,7 @@ class insertarRegistroAlimentos(APIView):
             alimentos = request.data.get('alimentos')
             registro = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario, Fec_reg=fecha)
             if registro.exists():
-                return Response({'mensaje': 'false'})
+                return Response({'mensaje': 'Ya existe un registro en la fecha indicada'})
             else:
                 registroNuevo = REGISTRO_ALIMENTOS(
                     Fec_reg= fecha,

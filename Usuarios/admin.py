@@ -30,7 +30,7 @@ class TipAlimentosAdmin(admin.ModelAdmin):
 
 @admin.register(ALIMENTOS)
 class AlimentosAadmin(admin.ModelAdmin):
-    list_display=('Img_Ali','Nom_Ali','Cal_Ali','Cod_Tip')
+    list_display=('Nom_Ali','Cal_Ali','Cod_Tip')
     ordering=('Nom_Ali',)
     search_fields=('Nom_Ali','Cod_Tip','Cod_Tip')
 
