@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import USUARIOS, REG_USUARIOS, REGISTRO_ALIMENTOS, DETALLE_ALIMENTOS, ALIMENTOS
+from .models import USUARIOS, REG_USUARIOS, REGISTRO_ALIMENTOS, DETALLE_ALIMENTOS, ALIMENTOS, TIP_ALIMENTOS
 from datetime import date
-from .serializers import RegUsuariosSerializer, RegistroAlimentosSerializer, DetalleAlimentosSerializer
+from .serializers import *
 
 
 
@@ -183,5 +183,24 @@ class filtrarRegistrosAlimentos(APIView):
             detalle_reg = DETALLE_ALIMENTOS.objects.filter(Cod_Reg__Usuario=usuario,Cod_Reg__Fec_reg__gte=fechaIni, Cod_Reg__Fec_reg__lte=fechaFin)
             detalleSerializer=DetalleAlimentosSerializer(detalle_reg,many=True)
             return Response({'registros':serializer.data,'detalles':detalleSerializer.data})
+        except Exception as e:
+            return Response({'mensaje': str(e)})
+        
+class listarTiposDeAlimentos(APIView):
+    def get(self, request):
+        try:
+            tiposAlimentos= TIP_ALIMENTOS.objects.all()
+            serializer= TipAlimentosSerializer(tiposAlimentos, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response({'mensaje': str(e)})
+        
+class listarAlimentos(APIView):
+    def post(self, request):
+        try:
+            idTip=request.data.get('Id_Tip')
+            alimentos=ALIMENTOS.objects.filter(Cod_Tip=idTip).order_by('Nom_Ali')
+            serializer= AlimentosSerializer(alimentos, many=True)
+            return Response(serializer.data)
         except Exception as e:
             return Response({'mensaje': str(e)})
