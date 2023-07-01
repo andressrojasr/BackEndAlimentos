@@ -164,7 +164,7 @@ class listarRegistrosAlimentos(APIView):
     def post(self, request):
         try:
             usuario = request.data.get('Usuario')
-            reg_usuarios = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario).order_by('-Fec_Reg')
+            reg_usuarios = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario).order_by('-Fec_reg')
             serializer = RegistroAlimentosSerializer(reg_usuarios, many=True)
             detalle_reg = DETALLE_ALIMENTOS.objects.filter(Usuario=usuario)
             detalleSerializer=DetalleAlimentosSerializer(detalle_reg,many=True)
