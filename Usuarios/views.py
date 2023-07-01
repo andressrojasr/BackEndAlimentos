@@ -166,7 +166,7 @@ class listarRegistrosAlimentos(APIView):
             usuario = request.data.get('Usuario')
             reg_usuarios = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario).order_by('-Fec_reg')
             serializer = RegistroAlimentosSerializer(reg_usuarios, many=True)
-            detalle_reg = DETALLE_ALIMENTOS.objects.filter(Usuario=usuario)
+            detalle_reg = DETALLE_ALIMENTOS.objects.filter(Cod_Reg__Usuario=usuario)
             detalleSerializer=DetalleAlimentosSerializer(detalle_reg,many=True)
             return Response({'registros':serializer.data,'detalles':detalleSerializer.data})
         except Exception as e:
