@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import USUARIOS, REG_USUARIOS, REGISTRO_ALIMENTOS, DETALLE_ALIMENTOS, ALIMENTOS
 from datetime import date
-from .serializers import RegUsuariosSerializer
+from .serializers import RegUsuariosSerializer, RegistroAlimentosSerializer, DetalleAlimentosSerializer
 
 
 
@@ -160,5 +160,15 @@ class insertarRegistroAlimentos(APIView):
         except REGISTRO_ALIMENTOS.DoesNotExist:
             return Response({'mensaje': 'false'})
 
-
+class listarRegistrosAlimentos(APIView):
+    def post(self, request):
+        try:
+            usuario = request.data.get('Usuario')
+            reg_usuarios = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario).order_by('-Fec_Reg')
+            serializer = RegistroAlimentosSerializer(reg_usuarios, many=True)
+            detalle_reg = DETALLE_ALIMENTOS.objects.filter(Usuario=usuario)
+            detalleSerializer=DetalleAlimentosSerializer(detalle_reg,many=True)
+            return Response(serializer.data,detalleSerializer.data)
+        except Exception as e:
+            return Response({'mensaje': str(e)})
         

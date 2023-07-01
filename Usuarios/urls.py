@@ -21,5 +21,6 @@ urlpatterns = [
     path('auth/eliminarRegistro/', eliminarRegistro.as_view(), name='eliminarRegistro'),
     path('auth/filtrarRegistro/', filtrarRegistro.as_view(), name='filtrarRegistro'),
     path('auth/insertarRegistroAlimentos/', insertarRegistroAlimentos.as_view(), name='insertarRegistroAlimentos'),
+    path('auth/listarRegistrosAlimentos/', listarRegistrosAlimentos.as_view(), name='listarRegistrosAlimentos'),
     path('api/', include(router.urls)),
 ]
