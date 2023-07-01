@@ -57,7 +57,7 @@ class TIP_ALIMENTOS(models.Model):
 
 class ALIMENTOS(models.Model):
     Nom_Ali = models.CharField(max_length=20)
-    Cal_Ali = models.IntegerField()
+    Cal_Ali = models.IntegerField(upload_to='images/')
     Img_Ali = models.ImageField()
     Cod_Tip = models.ForeignKey(TIP_ALIMENTOS, on_delete=models.CASCADE)
 

@@ -98,6 +98,8 @@ JAZZMIN_UI_TWEAKS = {
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
 
 ROOT_URLCONF = 'backendAlimentos.urls'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TEMPLATES = [
     {
