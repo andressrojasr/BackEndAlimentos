@@ -168,7 +168,7 @@ class listarRegistrosAlimentos(APIView):
             serializer = RegistroAlimentosSerializer(reg_usuarios, many=True)
             detalle_reg = DETALLE_ALIMENTOS.objects.filter(Usuario=usuario)
             detalleSerializer=DetalleAlimentosSerializer(detalle_reg,many=True)
-            return Response(serializer.data,detalleSerializer.data)
+            return Response({serializer.data,detalleSerializer.data})
         except Exception as e:
             return Response({'mensaje': str(e)})
         
