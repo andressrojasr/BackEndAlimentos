@@ -172,3 +172,16 @@ class listarRegistrosAlimentos(APIView):
         except Exception as e:
             return Response({'mensaje': str(e)})
         
+class filtrarRegistrosAlimentos(APIView):
+    def post(self, request):
+        try:
+            usuario = request.data.get('Usuario')
+            fechaIni = request.data.get('Fec_Ini')
+            fechaFin = request.data.get('Fec_Fin')
+            reg_usuarios = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario, Fec_Reg__gte=fechaIni, Fec_Reg__lte=fechaFin).order_by('-Fec_reg')
+            serializer = RegistroAlimentosSerializer(reg_usuarios, many=True)
+            detalle_reg = DETALLE_ALIMENTOS.objects.filter(Cod_Reg__Usuario=usuario,Cod_Reg__Fec_Reg__gte=fechaIni, Cod_Reg__Fec_Reg_lte=fechaFin)
+            detalleSerializer=DetalleAlimentosSerializer(detalle_reg,many=True)
+            return Response({'registros':serializer.data,'detalles':detalleSerializer.data})
+        except Exception as e:
+            return Response({'mensaje': str(e)})
