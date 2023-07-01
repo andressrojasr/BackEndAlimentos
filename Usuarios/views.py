@@ -135,7 +135,7 @@ class insertarRegistroAlimentos(APIView):
             if registro.exists():
                 return Response({'mensaje': 'false'})
             else:
-                registro= REGISTRO_ALIMENTOS.objects.create(Fec_reg=fecha, Usuario=usuario)
+                registroNuevo=REGISTRO_ALIMENTOS.objects.create(Fec_reg=fecha, Usuario=usuario)
 
                 for alimento in alimentos:
                     idAli= alimento.get('id_Ali')
@@ -144,8 +144,8 @@ class insertarRegistroAlimentos(APIView):
                     alimento_obj= ALIMENTOS.objects.get(id=idAli)
                     cantCalo=(alimento_obj.Cal_Ali*cantidad)
 
-                    detalle = DETALLE_ALIMENTOS.objects.create(
-                        Cod_Reg= registro,
+                    DETALLE_ALIMENTOS.objects.create(
+                        Cod_Reg= registroNuevo,
                         Id_Ali = alimento_obj,
                         Cantidad = cantidad,
                         Cant_calo = cantCalo
