@@ -36,7 +36,7 @@ class AlimentosAadmin(admin.ModelAdmin):
 
 @admin.register(DETALLE_ALIMENTOS)
 class DetalleAlimentosAdmin(admin.ModelAdmin):
-    list_display=('Cod_Reg','Id_Ali','Cant_calo')
+    list_display=('Cod_Reg','Id_Ali','Cantidad','Cant_calo')
     ordering=('Cod_Reg',)
     search_fields=('Cod_Reg','Id_Ali')
 
