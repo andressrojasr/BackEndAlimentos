@@ -27,6 +27,7 @@ class AlimentosSerializer(serializers.ModelSerializer):
         fields = ('id','Nom_Ali','Cal_Ali','Img_Ali','Cod_Tip')
 
 class DetalleAlimentosSerializer(serializers.ModelSerializer):
+    Nom_Ali = serializers.CharField(source='Id_Ali.Nom_Ali', read_only=True)
     class Meta:
         model = DETALLE_ALIMENTOS
-        fields= ('id','Cod_Reg','Id_Ali','Cantidad','Cant_calo')
+        fields= ('id','Cod_Reg','Id_Ali','Cantidad','Cant_calo','Nom_Ali')
