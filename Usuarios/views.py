@@ -144,10 +144,10 @@ class insertarRegistroAlimentos(APIView):
 
                 for alimento in alimentos:
                     idAli= alimento.get('id_Ali')
-                    cantidad = alimento.get('Cantidad')
+                    cantidad = float(alimento.get('Cantidad'))
                     
                     alimento_obj= ALIMENTOS.objects.get(id=idAli)
-                    cantCalo=(alimento_obj.Cal_Ali*cantidad)
+                    cantCalo=round((float(alimento_obj.Cal_Ali)*cantidad),2)
 
                     detalle= DETALLE_ALIMENTOS(
                         Cod_Reg= registroNuevo,
