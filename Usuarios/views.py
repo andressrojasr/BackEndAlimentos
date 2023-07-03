@@ -221,7 +221,7 @@ class editarRegistroAlimentos(APIView):
                 cantidad= float(detalle.get('Cantidad'))
                 cantCalo = float(detalle.get('Cant_calo'))
 
-                if detalleId:
+                if detalleId!='':
                     try:
                         alimento= ALIMENTOS.objects.get(id=idAli)
                         detalleAlimentos=DETALLE_ALIMENTOS.objects.get(id=detalleId)
