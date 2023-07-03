@@ -217,9 +217,9 @@ class editarRegistroAlimentos(APIView):
 
             for detalle in detalles:
                 detalleId= detalle.get('id')
-                idAli= detalle.get('id_Ali')
-                cantidad= float(detalle.get('cantidad'))
-                cantCalo = float(detalle.get('Can_Calo'))
+                idAli= detalle.get('Id_Ali')
+                cantidad= float(detalle.get('Cantidad'))
+                cantCalo = float(detalle.get('Cant_calo'))
 
                 if detalleId:
                     try:
