@@ -232,7 +232,7 @@ class editarRegistroAlimentos(APIView):
                     except Exception as e:
                         return Response({'mensaje': str(e)})
                 else:
-                    DETALLE_ALIMENTOS.objects.create(Cod_Reg=registro,Cantidad=cantidad,Cant_calo=(cantidad*cantCalo))
+                    DETALLE_ALIMENTOS.objects.create(Cod_Reg=registro,Id_Ali=idAli,Cantidad=cantidad,Cant_calo=round((cantidad*cantCalo),2))
             
             return Response({'mensaje':'Registro actualizado exitosamente'})
         except Exception as e:
