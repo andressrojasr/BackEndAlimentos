@@ -204,3 +204,34 @@ class listarAlimentos(APIView):
             return Response(serializer.data)
         except Exception as e:
             return Response({'mensaje': str(e)})
+        
+class editarRegistroAlimentos(APIView):
+    def post(self, request):
+        try:
+            detalles= request.data.get('alimentos')
+            registro= request.data.get('id')
+
+            registro= REGISTRO_ALIMENTOS.objects.get(id=registro)
+
+            DETALLE_ALIMENTOS.objects.filter(Cod_Reg=registro).exclude(id__in=[detalle.get('id') for detalle in detalles]).delete()
+
+            for detalle in detalles:
+                detalleId= detalle.get('id')
+                idAli= detalle.get('id_Ali')
+                cantidad= float(detalle.get('cantidad'))
+                cantCalo = float(detalle.get('Can_Calo'))
+
+                if detalleId:
+                    try:
+                        detalleAlimentos=DETALLE_ALIMENTOS.objects.get(id=detalleId)
+                        detalleAlimentos.Cantidad=cantidad
+                        detalleAlimentos.Id_Ali= idAli
+                        detalleAlimentos.Cant_calo=(cantidad*cantCalo)
+                        detalleAlimentos.save()
+                    except:
+                        pass
+                else:
+                    DETALLE_ALIMENTOS.objects.create(Cod_Reg=registro,Cantidad=cantidad,Cant_calo=(cantidad*cantCalo))
+                    return Response('mensaje':'Registro actualizado exitosamente')
+        except Exception as e:
+            return Response({'mensaje': str(e)})
