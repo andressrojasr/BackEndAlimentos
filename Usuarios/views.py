@@ -220,10 +220,9 @@ class editarRegistroAlimentos(APIView):
                 idAli= detalle.get('Id_Ali')
                 cantidad= int(detalle.get('Cantidad'))
                 cantCalo = float(detalle.get('Cant_calo'))
-
+                alimento= ALIMENTOS.objects.get(id=idAli)
                 if detalleId!=-1:
                     try:
-                        alimento= ALIMENTOS.objects.get(id=idAli)
                         detalleAlimentos=DETALLE_ALIMENTOS.objects.get(id=detalleId)
                         detalleAlimentos.Cantidad=cantidad
                         detalleAlimentos.Id_Ali= alimento
@@ -232,7 +231,7 @@ class editarRegistroAlimentos(APIView):
                     except Exception as e:
                         return Response({'mensaje': str(e)})
                 else:
-                    DETALLE_ALIMENTOS.objects.create(Cod_Reg=registro,Id_Ali=idAli,Cantidad=cantidad,Cant_calo=round((cantidad*cantCalo),2))
+                    DETALLE_ALIMENTOS.objects.create(Cod_Reg=registro,Id_Ali=alimento,Cantidad=cantidad,Cant_calo=round((cantidad*cantCalo),2))
             
             return Response({'mensaje':'Registro actualizado exitosamente'})
         except Exception as e:
