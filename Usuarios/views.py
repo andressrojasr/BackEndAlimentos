@@ -228,8 +228,8 @@ class editarRegistroAlimentos(APIView):
                         detalleAlimentos.Id_Ali= idAli
                         detalleAlimentos.Cant_calo=(cantidad*cantCalo)
                         detalleAlimentos.save()
-                    except:
-                        pass
+                    except Exception as e:
+                        return Response({'mensaje': str(e)})
                 else:
                     DETALLE_ALIMENTOS.objects.create(Cod_Reg=registro,Cantidad=cantidad,Cant_calo=(cantidad*cantCalo))
             
