@@ -223,9 +223,10 @@ class editarRegistroAlimentos(APIView):
 
                 if detalleId:
                     try:
+                        alimento= ALIMENTOS.objects.get(id=idAli)
                         detalleAlimentos=DETALLE_ALIMENTOS.objects.get(id=detalleId)
                         detalleAlimentos.Cantidad=cantidad
-                        detalleAlimentos.Id_Ali= idAli
+                        detalleAlimentos.Id_Ali= alimento
                         detalleAlimentos.Cant_calo=(cantidad*cantCalo)
                         detalleAlimentos.save()
                     except Exception as e:
