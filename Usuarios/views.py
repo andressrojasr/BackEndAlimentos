@@ -219,8 +219,8 @@ class editarRegistroAlimentos(APIView):
                 detalleId= detalle.get('id')
                 idAli= detalle.get('Id_Ali')
                 cantidad= int(detalle.get('Cantidad'))
-                cantCalo = float(detalle.get('Cant_calo'))
                 alimento= ALIMENTOS.objects.get(id=idAli)
+                cantCalo = alimento.Cal_Ali
                 if detalleId!=-1:
                     try:
                         detalleAlimentos=DETALLE_ALIMENTOS.objects.get(id=detalleId)
