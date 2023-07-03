@@ -216,9 +216,9 @@ class editarRegistroAlimentos(APIView):
             DETALLE_ALIMENTOS.objects.filter(Cod_Reg=registro).exclude(id__in=[detalle.get('id') for detalle in detalles]).delete()
 
             for detalle in detalles:
-                detalleId= detalle.get('id')
+                detalleId= int(detalle.get('id'))
                 idAli= detalle.get('Id_Ali')
-                cantidad= float(detalle.get('Cantidad'))
+                cantidad= int(detalle.get('Cantidad'))
                 cantCalo = float(detalle.get('Cant_calo'))
 
                 if detalleId:
