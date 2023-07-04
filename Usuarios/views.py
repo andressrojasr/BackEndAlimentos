@@ -240,7 +240,7 @@ class editarRegistroAlimentos(APIView):
 class eliminarRegistroAlimentos(APIView):
     def post(self, request):
         try:
-            idreg=request.get('id')
+            idreg=request.data.get('id')
             registro= REGISTRO_ALIMENTOS.objects.get(id=idreg)
             registro.delete()
             return Response({'mensjae':'true'})
@@ -250,7 +250,7 @@ class eliminarRegistroAlimentos(APIView):
 class listarAlimentosConsumidos(APIView):
     def post(self, request):
         try:
-            usuario= request.get('Usuario')
+            usuario= request.data.get('Usuario')
             usuario_obj = USUARIOS.objects.get(Usuario=usuario)
             registros = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario_obj)
             alimentos_consumidos = []
