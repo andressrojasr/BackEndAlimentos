@@ -243,13 +243,9 @@ class eliminarRegistroAlimentos(APIView):
             idreg=request.data.get('id')
             registro= REGISTRO_ALIMENTOS.objects.get(id=idreg)
             registro.delete()
-            return Response({'mensjae':'true'})
+            return Response({'mensaje':'true'})
         except Exception as e:
             return Response({'mensaje': str(e)})
-        
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import USUARIOS, DETALLE_ALIMENTOS
 
 class listarAlimentosConsumidos(APIView):
     def post(self, request):
