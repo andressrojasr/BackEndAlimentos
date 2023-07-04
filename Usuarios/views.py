@@ -236,3 +236,37 @@ class editarRegistroAlimentos(APIView):
             return Response({'mensaje':'Registro actualizado exitosamente'})
         except Exception as e:
             return Response({'mensaje': str(e)})
+        
+class eliminarRegistroAlimentos(APIView):
+    def post(self, request):
+        try:
+            idreg=request.get('id')
+            registro= REGISTRO_ALIMENTOS.objects.get(id=idreg)
+            registro.delete()
+            return Response({'mensjae':'true'})
+        except Exception as e:
+            return Response({'mensaje': str(e)})
+        
+class AlimentosConsumidosAPIView(APIView):
+    def get(self, request):
+        try:
+            usuario= request.get('Usuario')
+            usuario_obj = USUARIOS.objects.get(Usuario=usuario)
+            registros = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario_obj)
+            alimentos_consumidos = []
+            cantidades_consumidas = []
+            
+            for registro in registros:
+                detalles = DETALLE_ALIMENTOS.objects.filter(Cod_Reg=registro)
+                for detalle in detalles:
+                    alimentos_consumidos.append(detalle.Id_Ali)
+                    cantidades_consumidas.append(detalle.Cantidad)
+            
+            return Response({
+                'alimentos_consumidos': alimentos_consumidos,
+                'cantidades_consumidas': cantidades_consumidas
+            })
+        
+        except USUARIOS.DoesNotExist:
+            return Response({'error': 'El usuario no existe'})
+        
