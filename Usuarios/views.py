@@ -249,24 +249,48 @@ class eliminarRegistroAlimentos(APIView):
         
 class listarAlimentosConsumidos(APIView):
     def post(self, request):
-        try:
-            usuario= request.data.get('Usuario')
-            usuario_obj = USUARIOS.objects.get(Usuario=usuario)
-            registros = REGISTRO_ALIMENTOS.objects.filter(Usuario=usuario_obj)
-            alimentos_consumidos = []
-            cantidades_consumidas = []
-            
-            for registro in registros:
-                detalles = DETALLE_ALIMENTOS.objects.filter(Cod_Reg=registro)
-                for detalle in detalles:
-                    alimentos_consumidos.append(detalle.Id_Ali)
-                    cantidades_consumidas.append(detalle.Cantidad)
-            
-            return Response({
-                'alimentos_consumidos': alimentos_consumidos,
-                'cantidades_consumidas': cantidades_consumidas
-            })
+        # Obtener el usuario desde los parámetros de la URL o los datos enviados
+        usuario = request.GET.get('usuario')  # Ajusta esto según cómo envíes el usuario
         
+        # Obtener el objeto de usuario
+        try:
+            usuario_obj = USUARIOS.objects.get(Usuario=usuario)
         except USUARIOS.DoesNotExist:
-            return Response({'error': 'El usuario no existe'})
+            return Response({"message": "Usuario no encontrado"}, status=404)
+        
+        # Obtener los detalles de alimentos del usuario
+        detalles = DETALLE_ALIMENTOS.objects.filter(Cod_Reg__Usuario=usuario_obj)
+        
+        # Crear diccionarios para almacenar los alimentos y las sumas
+        alimentos_dict = {}
+        sumas_dict = {}
+        
+        # Iterar sobre los detalles de alimentos y sumar las cantidades
+        for detalle in detalles:
+            alimento = detalle.Id_Ali
+            cantidad = detalle.Cantidad
+            
+            if alimento in alimentos_dict:
+                alimentos_dict[alimento] += cantidad
+            else:
+                alimentos_dict[alimento] = cantidad
+        
+        # Obtener los objetos de alimentos correspondientes
+        alimentos = ALIMENTOS.objects.filter(pk__in=alimentos_dict.keys())
+        
+        # Construir los arrays de alimentos y sumas
+        alimentos_array = []
+        sumas_array = []
+        
+        for alimento in alimentos:
+            alimentos_array.append(alimento.Nom_Ali)
+            sumas_array.append(alimentos_dict[alimento])
+        
+        # Devolver la respuesta con los arrays de alimentos y sumas
+        response_data = {
+            "alimentos": alimentos_array,
+            "sumas": sumas_array
+        }
+        
+        return Response(response_data)
         
