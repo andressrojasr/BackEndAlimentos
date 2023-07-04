@@ -264,8 +264,13 @@ class listarAlimentosConsumidos(APIView):
             else:
                 alimentos[alimento_nombre] = cantidad
         
-        nombres_alimentos = list(alimentos.keys())
-        cantidades_alimentos = list(alimentos.values())
+        alimentos_ordenados = sorted(alimentos.items(), key=lambda x: x[1], reverse=True)
+        
+        # Limitar a los cinco alimentos más consumidos
+        alimentos_ordenados = alimentos_ordenados[:5]
+        
+        nombres_alimentos = [alimento[0] for alimento in alimentos_ordenados]
+        cantidades_alimentos = [alimento[1] for alimento in alimentos_ordenados]
         
         response_data = {
             'nombres_alimentos': nombres_alimentos,
