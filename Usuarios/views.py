@@ -247,7 +247,7 @@ class eliminarRegistroAlimentos(APIView):
         except Exception as e:
             return Response({'mensaje': str(e)})
         
-class AlimentosConsumidosAPIView(APIView):
+class listarAlimentosConsumidos(APIView):
     def get(self, request):
         try:
             usuario= request.get('Usuario')
