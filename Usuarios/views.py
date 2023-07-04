@@ -247,50 +247,32 @@ class eliminarRegistroAlimentos(APIView):
         except Exception as e:
             return Response({'mensaje': str(e)})
         
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import USUARIOS, DETALLE_ALIMENTOS
+
 class listarAlimentosConsumidos(APIView):
     def post(self, request):
-        # Obtener el usuario desde los parámetros de la URL o los datos enviados
-        usuario = request.data.get('usuario')  # Ajusta esto según cómo envíes el usuario
-        
-        # Obtener el objeto de usuario
-        try:
-            usuario_obj = USUARIOS.objects.get(Usuario=usuario)
-        except USUARIOS.DoesNotExist:
-            return Response({"message": "Usuario no encontrado"}, status=404)
-        
-        # Obtener los detalles de alimentos del usuario
-        detalles = DETALLE_ALIMENTOS.objects.filter(Cod_Reg__Usuario=usuario_obj)
-        
-        # Crear diccionarios para almacenar los alimentos y las sumas
-        alimentos_dict = {}
-        sumas_dict = {}
-        
-        # Iterar sobre los detalles de alimentos y sumar las cantidades
+        usuario_id = request.data.get('usuario')
+        detalles = DETALLE_ALIMENTOS.objects.filter(Cod_Reg__Usuario__Usuario=usuario_id)
+        alimentos = {}
         for detalle in detalles:
-            alimento = detalle.Id_Ali
+            alimento_nombre = detalle.Id_Ali.Nom_Ali
             cantidad = detalle.Cantidad
-            
-            if alimento in alimentos_dict:
-                alimentos_dict[alimento] += cantidad
+            if alimento_nombre in alimentos:
+                alimentos[alimento_nombre] += cantidad
             else:
-                alimentos_dict[alimento] = cantidad
+                alimentos[alimento_nombre] = cantidad
         
-        # Obtener los objetos de alimentos correspondientes
-        alimentos = ALIMENTOS.objects.filter(pk__in=alimentos_dict.keys())
+        nombres_alimentos = list(alimentos.keys())
+        cantidades_alimentos = list(alimentos.values())
         
-        # Construir los arrays de alimentos y sumas
-        alimentos_array = []
-        sumas_array = []
-        
-        for alimento in alimentos:
-            alimentos_array.append(alimento.Nom_Ali)
-            sumas_array.append(alimentos_dict[alimento])
-        
-        # Devolver la respuesta con los arrays de alimentos y sumas
         response_data = {
-            "alimentos": alimentos_array,
-            "sumas": sumas_array
+            'nombres_alimentos': nombres_alimentos,
+            'cantidades_alimentos': cantidades_alimentos
         }
         
         return Response(response_data)
+
+      
         
