@@ -250,7 +250,7 @@ class eliminarRegistroAlimentos(APIView):
 class listarAlimentosConsumidos(APIView):
     def post(self, request):
         # Obtener el usuario desde los parámetros de la URL o los datos enviados
-        usuario = request.GET.get('usuario')  # Ajusta esto según cómo envíes el usuario
+        usuario = request.data.get('usuario')  # Ajusta esto según cómo envíes el usuario
         
         # Obtener el objeto de usuario
         try:
