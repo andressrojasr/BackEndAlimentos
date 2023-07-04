@@ -248,7 +248,7 @@ class eliminarRegistroAlimentos(APIView):
             return Response({'mensaje': str(e)})
         
 class listarAlimentosConsumidos(APIView):
-    def get(self, request):
+    def post(self, request):
         try:
             usuario= request.get('Usuario')
             usuario_obj = USUARIOS.objects.get(Usuario=usuario)
