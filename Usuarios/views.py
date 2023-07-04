@@ -265,19 +265,48 @@ class listarAlimentosConsumidos(APIView):
                 alimentos[alimento_nombre] = cantidad
         
         alimentos_ordenados = sorted(alimentos.items(), key=lambda x: x[1], reverse=True)
-        
-        # Limitar a los cinco alimentos más consumidos
+
         alimentos_ordenados = alimentos_ordenados[:5]
         
         nombres_alimentos = [alimento[0] for alimento in alimentos_ordenados]
         cantidades_alimentos = [alimento[1] for alimento in alimentos_ordenados]
         
         response_data = {
-            'nombres_alimentos': nombres_alimentos,
-            'cantidades_alimentos': cantidades_alimentos
+            'alimentos': nombres_alimentos,
+            'cantidades': cantidades_alimentos
         }
         
         return Response(response_data)
+    
+class filtrarAlimentosConsumidos(APIView):
+    def post(self, request):
+        usuario_id = request.data.get('usuario')
+        fechaini = request.data.get('fecini')
+        fechafin = request.data.get('fecfin')
+        detalles = DETALLE_ALIMENTOS.objects.filter(Cod_Reg__Usuario__Usuario=usuario_id, Cod_Reg__Fec_reg__gte=fechaini, Cod_Reg__Fec_reg__lte=fechafin)
+        alimentos = {}
+        for detalle in detalles:
+            alimento_nombre = detalle.Id_Ali.Nom_Ali
+            cantidad = detalle.Cantidad
+            if alimento_nombre in alimentos:
+                alimentos[alimento_nombre] += cantidad
+            else:
+                alimentos[alimento_nombre] = cantidad
+        
+        alimentos_ordenados = sorted(alimentos.items(), key=lambda x: x[1], reverse=True)
+
+        alimentos_ordenados = alimentos_ordenados[:5]
+        
+        nombres_alimentos = [alimento[0] for alimento in alimentos_ordenados]
+        cantidades_alimentos = [alimento[1] for alimento in alimentos_ordenados]
+        
+        response_data = {
+            'alimentos': nombres_alimentos,
+            'cantidades': cantidades_alimentos
+        }
+        
+        return Response(response_data)
+
 
       
         
