@@ -58,6 +58,7 @@ class TIP_ALIMENTOS(models.Model):
 class ALIMENTOS(models.Model):
     Nom_Ali = models.CharField(max_length=20,verbose_name='Nombre')
     Cal_Ali = models.IntegerField(verbose_name='Calorias')
+    Img_Ali = models.ImageField(null=True, verbose_name='Imagen')
     Cod_Tip = models.ForeignKey(TIP_ALIMENTOS, on_delete=models.CASCADE,verbose_name='Tipo de alimento')
 
     def __str__(self):
