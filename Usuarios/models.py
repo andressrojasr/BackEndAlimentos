@@ -3,10 +3,10 @@ from django.contrib.auth.hashers import make_password
 
 class USUARIOS(models.Model):
     Usuario = models.CharField(max_length=20, primary_key=True)
-    Nom_Usu = models.CharField(max_length=20)
-    Ape_Usu = models.CharField(max_length=20)
-    Con_Usu = models.CharField(max_length=20)
-    Fec_Nac_usu = models.DateField()
+    Nom_Usu = models.CharField(max_length=20,verbose_name="Nombre")
+    Ape_Usu = models.CharField(max_length=20,verbose_name="Apellido")
+    Con_Usu = models.CharField(max_length=20,verbose_name="Contraseña")
+    Fec_Nac_usu = models.DateField(verbose_name="Fecha de nacimiento")
 
     def __str__(self):
         txt ="{0} (Nombre: {1} Apellido: {2})"
@@ -17,10 +17,10 @@ class USUARIOS(models.Model):
         verbose_name_plural="Usuarios"
     
 class REG_USUARIOS(models.Model):
-    Fec_Reg = models.DateField(auto_now_add=True, auto_now=False)
-    Est_Usu = models.FloatField()
-    Pes_Usu = models.FloatField()
-    Ind_Mas_Cor= models.FloatField(null=True)
+    Fec_Reg = models.DateField(auto_now_add=True, auto_now=False,verbose_name="Fecha de registro")
+    Est_Usu = models.FloatField(verbose_name="Estatura")
+    Pes_Usu = models.FloatField(verbose_name="Peso")
+    Ind_Mas_Cor= models.FloatField(null=True,verbose_name="IMC")
     Usuario = models.ForeignKey(USUARIOS, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -32,7 +32,7 @@ class REG_USUARIOS(models.Model):
         verbose_name_plural="Registros de IMC Usuarios"
 
 class REGISTRO_ALIMENTOS(models.Model):
-    Fec_reg = models.DateField()
+    Fec_reg = models.DateField(verbose_name="Fecha de registro")
     Usuario = models.ForeignKey(USUARIOS, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -44,8 +44,8 @@ class REGISTRO_ALIMENTOS(models.Model):
         verbose_name_plural="Registros de Alimentos Consumidos"
 
 class TIP_ALIMENTOS(models.Model):
-    Nom_tip = models.CharField(max_length=20)
-    Des_Tip = models.CharField(max_length=50, null=True)
+    Nom_tip = models.CharField(max_length=20,verbose_name="Nombre")
+    Des_Tip = models.CharField(max_length=50, null=True,verbose_name="Descripción")
 
     def __str__(self):
         txt ="{0}"
@@ -56,10 +56,10 @@ class TIP_ALIMENTOS(models.Model):
         verbose_name_plural="Tipos de Alimentos"
 
 class ALIMENTOS(models.Model):
-    Nom_Ali = models.CharField(max_length=20)
-    Cal_Ali = models.IntegerField()
-    Img_Ali = models.ImageField()
-    Cod_Tip = models.ForeignKey(TIP_ALIMENTOS, on_delete=models.CASCADE)
+    Nom_Ali = models.CharField(max_length=20,verbose_name="Nombre")
+    Cal_Ali = models.IntegerField(verbose_name="Calorias")
+    Img_Ali = models.ImageField(verbose_name="Imagen")
+    Cod_Tip = models.ForeignKey(TIP_ALIMENTOS, on_delete=models.CASCADE,verbose_name="Tipo de alimento")
 
     def __str__(self):
         txt ="{0} (Calorias: {1})"
@@ -70,10 +70,10 @@ class ALIMENTOS(models.Model):
         verbose_name_plural="Alimentos"
 
 class DETALLE_ALIMENTOS(models.Model):
-    Cod_Reg = models.ForeignKey(REGISTRO_ALIMENTOS, on_delete=models.CASCADE)
-    Id_Ali = models.ForeignKey(ALIMENTOS, on_delete=models.CASCADE)
+    Cod_Reg = models.ForeignKey(REGISTRO_ALIMENTOS, on_delete=models.CASCADE,verbose_name="Registro")
+    Id_Ali = models.ForeignKey(ALIMENTOS, on_delete=models.CASCADE,verbose_name="Alimento")
     Cantidad= models.FloatField(null=True)
-    Cant_calo = models.FloatField(null=True)
+    Cant_calo = models.FloatField(null=True,verbose_name="Total calorias")
 
     def __str__(self):
         txt ="{0} (Id Alimento: {1} Cantidad calorias: {2})"
